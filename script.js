@@ -1,18 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // Select DOM elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
     // Function to add a task to the list
-    // silent: when true, do not show alert for empty input (used on initial load)
-    function addTask(silent = false) {
+    function addTask() {
         // Get trimmed task text
         const taskText = taskInput.value.trim();
 
-        // If input is empty, optionally alert and exit
+        // If input is empty, alert and exit
         if (taskText === '') {
-            if (!silent) alert('Please enter a task.');
+            alert('Please enter a task.');
             return;
         }
 
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeBtn.className = 'remove-btn';
 
         // Remove the task when the remove button is clicked
-        removeBtn.onclick = () => {
+        removeBtn.onclick = function() {
             taskList.removeChild(li);
         };
 
@@ -39,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event listeners to add tasks via button click or Enter key
-    addButton.addEventListener('click', () => addTask());
-    taskInput.addEventListener('keypress', (event) => {
+    addButton.addEventListener('click', addTask);
+    taskInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') addTask();
     });
 
-    // Invoke addTask on DOMContentLoaded in silent mode (no alert on empty)
-    addTask(true);
+    // Invoke addTask on DOMContentLoaded
+    addTask();
 });
